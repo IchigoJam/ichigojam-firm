@@ -275,6 +275,12 @@ typedef unsigned int uint;
 typedef unsigned long long uint64;
 //#define INT32_MAX 0x7fff
 
+#ifdef C99
+#define pint uintptr_t
+#else
+#define pint int
+#endif
+
 #ifndef NULL
 #define NULL 0
 #endif
