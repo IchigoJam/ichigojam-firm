@@ -128,9 +128,9 @@ INLINE uint8 basic_toupper(uint8 c) {
 	return c;
 }
 uint strlen8(const char* s) {
-	int n = (int)s;
+	pint n = (pint)s;
 	while (*s++);
-	return (int)s - n - 1;
+	return (int)((pint)s - n - 1);
 }
 /*STATIC*/ int put_num(int n) { // for RISC-V
 	int len = 0;
@@ -477,7 +477,7 @@ int basic_execute(char* commandline) {
 			command_rem();
 			continue;
 		} else if (*pc == '\0') {
-			if (((int)pc & 1) == 0) { // align 2byte
+			if (((pint)pc & 1) == 0) { // align 2byte
 				pc++;
 			}
 			if (pc >= list && pc + 4 < list + _g.listsize) {
