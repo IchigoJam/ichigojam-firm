@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 void video_on() {
   SCREEN_W = 32;
   SCREEN_H = 24;

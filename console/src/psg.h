@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 inline void psg_init() {
 }
 inline void psg_tick() {

@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 #include "SPI.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"

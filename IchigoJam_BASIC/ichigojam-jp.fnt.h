@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 #ifndef __LANG_JP__
 #define __LANG_JP__
 #if VER_PLATFORM == PLATFORM_LPC1114

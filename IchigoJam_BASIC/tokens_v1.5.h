@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 #define N_TOKEN 132
 #define TOKEN_NULL 0
 #define TOKEN_VAR 1

@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 #ifndef __SCREEN_H__
 #define __SCREEN_H__
 

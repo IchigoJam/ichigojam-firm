@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 #ifndef __ROMAJIKANA_H__
 #define __ROMAJIKANA_H__
 

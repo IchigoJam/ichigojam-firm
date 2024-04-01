@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 #define ASCIIMORSE_LEN 63
 #define ASCIIMORSE_MIN 33
 #define ASCIIMORSE_MAX 95

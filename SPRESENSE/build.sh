@@ -1,4 +1,7 @@
 #!/bin/sh
+
+# Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 USER=$(whoami)
 OBJ=obj
 

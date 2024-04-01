@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 #define LANG_ALL 0 // all
 #define LANG_JP 1 // Japan
 #define LANG_MN 2 // Mongol

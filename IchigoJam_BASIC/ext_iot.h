@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 #ifndef __IOT_H__
 #define __IOT_H__
 

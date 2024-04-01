@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 // IchigoJam RAM
 #ifndef __RAM_H__
 #define __RAM_H__

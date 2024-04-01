@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 // 24804 
 // 24736 // randam
 // 24700 // main

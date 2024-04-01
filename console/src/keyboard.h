@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 #ifndef __KEYBOARD_H__
 #define __KEYBOARD_H__
 

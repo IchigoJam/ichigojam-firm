@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 INLINE void IJB_pwm(int port, int plen, int len);
 INLINE void pwm_off(int port);
 void io_init();

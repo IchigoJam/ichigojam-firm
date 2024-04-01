@@ -1,4 +1,7 @@
 #!/bin/sh
+
+# Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 USBSERIAL=/dev/cu.usbserial-110
 #USBSERIAL=/dev/cu.usbserial-10
 BPS=230400

@@ -1,3 +1,5 @@
+// Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
+
 #define TOKEN_LOG 1000
 
 void extension_init() {
