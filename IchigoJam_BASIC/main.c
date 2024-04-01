@@ -15,7 +15,7 @@
 // platform depends
 #include "config.h"
 
-#include "stddef.h"
+#include "ichigojam-stddef.h"
 
 // platform independs
 #include "lang.h"
@@ -30,7 +30,7 @@
 #include "system.h"
 #include "display.h"
 #include "keyboard.h"
-#include "io.h"
+#include "ichigojam-io.h"
 //#include "storage.h"
 #include "flashstorage.h" // rename storage -> flashstorage
 #include "random.h"

@@ -10,7 +10,7 @@
 
 // 8x4 = 32byte
 
-#include "stddef.h"
+#include "ichigojam-stddef.h"
 #include "config.h"
 
 /*
