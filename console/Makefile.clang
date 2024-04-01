@@ -1,0 +1,1 @@
+CC=clang -std=c99 -DC99
