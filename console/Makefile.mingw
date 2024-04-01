@@ -1,0 +1,1 @@
+CC=x86_64-w64-mingw32-gcc -std=c99 -DC99
