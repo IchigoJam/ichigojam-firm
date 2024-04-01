@@ -3,7 +3,7 @@
 #ifndef __SCREEN_H__
 #define __SCREEN_H__
 
-#include "stddef.h"
+#include "ichigojam-stddef.h"
 #include "vars.h"
 
 // SCREEN SIZE 可変に
