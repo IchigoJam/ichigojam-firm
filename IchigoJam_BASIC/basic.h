@@ -2455,14 +2455,12 @@ void command_renum() {
 	}
 
 	int index = 0;
-	int n = start;
 	for (;;) {
 		int num = list_getNumber(index);
 		if (num == 0)
 			break;
 		// GOTO / GOSUB の行番号付け替え必要!! 0.9.5 式を使ったので、完全な付け替えは不可能
 		command_renum2(index, start, step);
-		n += step;
 		index += list_getLength(index) + 4;
 	}
 	index = 0;
