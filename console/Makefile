@@ -1,6 +1,6 @@
 # Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
 
-TOOLCHAIN=gcc
+TOOLCHAIN?=gcc
 include Makefile.$(TOOLCHAIN)
 
 all: IchigoJam_BASIC
