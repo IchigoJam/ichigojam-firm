@@ -19,14 +19,14 @@
 #define PSG_DEFAULT_LEN 8 // == 4分音符
 #define PSG_DEFAULT_TEMPO 120
 
-//inline void psg_tick0();
-static inline void psg_tick();
-static inline void psg_playMML(char* mml);
-static inline void psg_beep(int tone, int len);
-static inline void psg_tempo(int tempo);
+//INLINE void psg_tick0();
+INLINE void psg_tick();
+INLINE void psg_playMML(char* mml);
+INLINE void psg_beep(int tone, int len);
+INLINE void psg_tempo(int tempo);
 
 // sound.h
-static inline void sound_tick();
+INLINE void sound_tick();
 static void sound_switch(int on);
 static void sound_init();
 
@@ -38,7 +38,7 @@ static void sound_init();
 #define PSG_TRUE_TONE_UNIT 381
 #endif
 
-static inline void sound_tone(int t);
+INLINE void sound_tone(int t);
 
 /* // 何向け??
 uint32 TONE_O0[] = { // 12*4 = 48byte
@@ -172,7 +172,7 @@ static uint32 psg_parseInt(char** s) { // ver 1.1まで+-入ってた! nullチ�
 }
 
 //#define psg_toupper _toupper // 使いまわしても変わらない
-static inline uint8 psg_toupper(uint8 c) {
+INLINE uint8 psg_toupper(uint8 c) {
 	if (c >= 'a' && c <= 'z') {
 		return c & 0b1011111; // 速度一緒 なぜか小文字のほうが速い
 //		return c + ('A' - 'a');
@@ -181,7 +181,7 @@ static inline uint8 psg_toupper(uint8 c) {
 }
 
 // C+D+EF+G+A+B
-static inline void psg_tick() {
+INLINE void psg_tick() {
 	// -> sound_tick() or here
 	if (_g.psgtone) {
 		_g.psgwaitcnt++;
@@ -363,7 +363,7 @@ static inline void psg_tick() {
 	}
 }
 
-static inline void psg_playMML(char* mml) {
+INLINE void psg_playMML(char* mml) {
 	sound_switch(mml != NULL);
 	
 	_g.psgmml = mml;
@@ -390,7 +390,7 @@ static inline void psg_playMML(char* mml) {
 	*/
 }
 
-static inline void psg_beep(int tone, int len) {
+INLINE void psg_beep(int tone, int len) {
 	_g.psglen = len * (PSG_TICK_FREQ / PSG_TICK_PER_SEC) * _g.psgratio; // v1.2b44
 	_g.psgtone = tone * _g.psgratio;
 	_g.psgwaitcnt = _g.psgtone - 1;
@@ -401,10 +401,10 @@ static inline void psg_beep(int tone, int len) {
 	sound_switch(tone);
 }
 
-static inline void psg_tempo(int tempo) {
+INLINE void psg_tempo(int tempo) {
 	_g.psgtempo = tempo;
 }
-static inline int psg_sound() {
+INLINE int psg_sound() {
 	return _g.psgtone || _g.psgmml;
 }
 

@@ -79,7 +79,7 @@ INLINE void IJB_dac(int port, int val); // 1.5
 // keyboard
 int key_getKey(); // from keybuffer, ret 0 if nul -> ret -1 if null 1.2b19
 static void key_clearKey();
-static inline uint key_getKeyboardID();
+INLINE uint key_getKeyboardID();
 
 // psg
 INLINE void psg_playMML(char* mml);
@@ -115,7 +115,7 @@ static void iot_out2(int ad, int len, int flash);
 
 #endif
 
-static inline void ws_out(int port, int nled, int reapeat);
+INLINE void ws_out(int port, int nled, int reapeat);
 
 // util -----------------------------------------------------
 
@@ -186,7 +186,7 @@ static void put_strmem(int n, int m) {
 }
 
 
-extern /*inline*/ int sin360(int deg); // +168byte, APIから使えるようにして +4byte
+extern /*INLINE*/ int sin360(int deg); // +168byte, APIから使えるようにして +4byte
 /*
 // -- sin/cos/tan from @yrm
 int32 sin32(int32 s);
@@ -283,7 +283,7 @@ static int16 list_findGoto(int16 number) {
 		index = -1;
 	return index;
 }
-static inline void list_setPC(int n) {
+INLINE void list_setPC(int n) {
 	pc = list + n + 3;
 	/*
 	pcnext = pc + *(pc - 1) + 4;
@@ -2339,7 +2339,7 @@ int command_list_next() {
 
 
 //renum 番号置き換え対応版 500byte増える -> 勘違い、intを割り算してたからだった
-static inline int16 list_findIndex(int16 number) { // for command_renum
+INLINE int16 list_findIndex(int16 number) { // for command_renum
 	int index = 0;
 	int cnt = 0;
 	for (;;) {
@@ -2351,7 +2351,7 @@ static inline int16 list_findIndex(int16 number) { // for command_renum
 	}
 	return cnt;
 }
-static inline void command_renum2(int index, int n, int step) {
+INLINE void command_renum2(int index, int n, int step) {
 	char* bkpc = pc;
 
 	pc = (char*)(list + index + 3);
@@ -3220,7 +3220,7 @@ int sin(int deg) { // 680, 20byte多いけど、高速 (int16にすると12byte�
 */
 
 /*
-static inline int sin(int deg) { // 700
+INLINE int sin(int deg) { // 700
 	int x = 0;
 	int y = 0;
 	int v = 37000000;

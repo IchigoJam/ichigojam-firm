@@ -254,7 +254,11 @@ mv ichigojam.bin ../bin/ichigojam.bin
 
 // #define EXT_SENSEHAT // Sense HAT用拡張
 
+#ifdef INLINE_AS_STATIC
+#define INLINE static
+#else
 #define INLINE static inline
+#endif
 
 #define ALL_STATIC
 

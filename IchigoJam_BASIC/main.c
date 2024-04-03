@@ -128,7 +128,7 @@ STATIC void IJB_input(char** line) {
 #include <xprintf.h>
 #endif
 
-inline void IJB_bps(int uart, int i2c) {
+INLINE void IJB_bps(int uart, int i2c) {
 	uart_bps(uart);
 #ifdef ENABLE_I2C_BPS
 	i2c0_bps(i2c);
