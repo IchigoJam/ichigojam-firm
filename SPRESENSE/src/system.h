@@ -5,9 +5,9 @@
 
 void system_init();
 void enterDeepSleep(int waitsec);
-INLINE void deepPowerDown();
-INLINE void IJB_sleep();
-INLINE void IJB_reset();
+inline void deepPowerDown();
+inline void IJB_sleep();
+inline static void IJB_reset();
 
 int getSleepFlag() {
 	return IJB_btn(0);
@@ -22,15 +22,15 @@ void system_init() {
 }
 void enterDeepSleep(int waitsec) {
 }
-INLINE void deepPowerDown() {
+inline void deepPowerDown() {
 }
-INLINE void IJB_sleep() {
+inline void IJB_sleep() {
 }
 
 void ichigojam_main(void);
 
 
-INLINE void IJB_reset() {
+inline static void IJB_reset() {
 	//void (*reset)(void) = NULL; //declare reset function at address 0
 	//reset();
 

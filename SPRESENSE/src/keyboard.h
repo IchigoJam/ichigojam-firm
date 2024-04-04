@@ -8,12 +8,12 @@
 struct keyflg_def key_flg;
 uint8 displaymode;
 
-INLINE void key_init() {
+static inline void key_init() {
   Serial.begin(115200);
   Serial2.begin(115200);
 }
 
-INLINE void key_send_reset() {
+static inline void key_send_reset() {
 }
 
 INLINE void key_enable(uint8 b) {
@@ -21,7 +21,7 @@ INLINE void key_enable(uint8 b) {
 }
 //void uart_checker();
 
-INLINE int key_btn(int n) {
+inline int key_btn(int n) {
 	return 0;
 }
 
@@ -55,7 +55,7 @@ void key_clearKey() {
 	*keybuf = 0;
 }
 
-INLINE uint key_getKeyboardID() {
+static inline uint key_getKeyboardID() {
 	return 0;
 }
 
@@ -69,7 +69,7 @@ INLINE void uart_init() {
 	_g.uartmode_rxd = DEFAULT_UARTMODE_RXD;
 }
 
-INLINE void IJB_uart(short txd, short rxd) {
+inline void IJB_uart(short txd, short rxd) {
 }
 
 void uart_putc(char c) { // 1.1b7 uart3でバッファモード, b12 バッファモードやめる？
@@ -88,7 +88,7 @@ void put_chr(char c) {
 }
 
 // basic interface
-INLINE int stopExecute() {
+inline int stopExecute() {
 	// todo: use keybuf
 	int k = key_readSerial();
 	if (k == 27 || k == 9) {

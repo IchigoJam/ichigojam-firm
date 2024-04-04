@@ -3,7 +3,7 @@
 #ifndef __EXT_WS_H__
 #define __EXT_WS_H__
 
-INLINE void ws_out(int port, int nled, int repeat) {
+static inline void ws_out(int port, int nled, int repeat) {
 	if (nled <= 0 || nled > 34 || !repeat)
 		return;
 	/*
