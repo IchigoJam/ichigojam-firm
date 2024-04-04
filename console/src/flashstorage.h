@@ -2,7 +2,7 @@
 
 void flash_init() {
 }
-INLINE int IJB_file() {
+inline int IJB_file() {
   return 0; // return _g.lastfile;
 }
 int IJB_save(int n, uint8* list, int size) {

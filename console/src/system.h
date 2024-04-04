@@ -4,9 +4,9 @@
 
 void system_init();
 void enterDeepSleep(int waitsec);
-INLINE void deepPowerDown();
-INLINE void IJB_sleep();
-INLINE void IJB_reset();
+inline void deepPowerDown();
+inline void IJB_sleep();
+inline static void IJB_reset();
 
 int getSleepFlag() {
   return 0;
@@ -15,11 +15,11 @@ void system_init() {
 }
 void enterDeepSleep(int waitsec) {
 }
-INLINE void deepPowerDown() {
+inline void deepPowerDown() {
 }
-INLINE void IJB_sleep() {
+inline void IJB_sleep() {
 }
-INLINE void IJB_reset() {
+inline static void IJB_reset() {
 }
 int IJB_wait(int n, int active) { // if stop ret 1
   usleep(n * 1000000 / 60);

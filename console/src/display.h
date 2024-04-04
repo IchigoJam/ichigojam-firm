@@ -4,14 +4,14 @@ void video_on() {
   SCREEN_W = 32;
   SCREEN_H = 24;
 }
-INLINE void video_off(int clkdiv) {
+inline void video_off(int clkdiv) {
 }
-INLINE int video_active() {
+inline int video_active() {
   return 0;
 }
 
-INLINE void IJB_lcd(uint mode) {
+inline void IJB_lcd(uint mode) {
 }
 
-INLINE void video_waitSync(uint n) {
+inline void video_waitSync(uint n) {
 }
