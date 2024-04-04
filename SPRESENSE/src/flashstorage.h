@@ -6,7 +6,7 @@ extern SDClass theSD;
 
 void flash_init() {
 }
-inline int IJB_file() {
+INLINE int IJB_file() {
 	return _g.lastfile;
 }
 int IJB_save(int n, uint8* list, int size) { // success:0, err: 1
