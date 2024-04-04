@@ -1,18 +1,18 @@
 // Copyright 2014-2024 the IchigoJam authors. All rights reserved. MIT license.
 
-/*INLINE*/ void IJB_pwm(int port, int plen, int len);
-INLINE void pwm_off(int port);
+/*S_INLINE*/ void IJB_pwm(int port, int plen, int len);
+S_INLINE void pwm_off(int port);
 void io_init();
-INLINE void io_set(int n);
-INLINE int analog_get(int ch);
-INLINE int io_get();
-INLINE void IJB_led(int st);
-/*INLINE*/ int IJB_in();
-INLINE void IJB_clo();
-INLINE int IJB_ana(int n);
-/*INLINE*/ int IJB_btn(int n);
-/*INLINE*/ void IJB_out(int port, int st);
-INLINE int IJB_i2c(uint8 writemode, uint16* param); // 0:success 1:io error 2:parm error
+S_INLINE void io_set(int n);
+S_INLINE int analog_get(int ch);
+S_INLINE int io_get();
+S_INLINE void IJB_led(int st);
+/*S_INLINE*/ int IJB_in();
+S_INLINE void IJB_clo();
+S_INLINE int IJB_ana(int n);
+/*S_INLINE*/ int IJB_btn(int n);
+/*S_INLINE*/ void IJB_out(int port, int st);
+S_INLINE int IJB_i2c(uint8 writemode, uint16* param); // 0:success 1:io error 2:parm error
 
 int i2c0_init() {
   return 0;
@@ -24,9 +24,9 @@ int i2c0_init() {
 // PWM 2,100,2000 で周期設定、2-4はまとめて設定、5は独立
 //   PWM n で、OUT出力からは除外される（設定してないと出力されない）
 //  OUT n,0 でPWMは停止する
-/*INLINE*/ void IJB_pwm(int port, int plen, int len) {
+/*S_INLINE*/ void IJB_pwm(int port, int plen, int len) {
 }
-INLINE void pwm_off(int port) {
+S_INLINE void pwm_off(int port) {
 }
 // I/O
 
@@ -51,36 +51,36 @@ IN
 void io_init() {
 }
 // ADC
-INLINE int analog_get(int ch) {
+S_INLINE int analog_get(int ch) {
   return 0;
 }
 
 #define ANA_THRESHOLD (1024 / 4)
-INLINE int io_get() {
+S_INLINE int io_get() {
   return 0;
 }
-INLINE void io_set(int n) {
+S_INLINE void io_set(int n) {
 }
 
-INLINE void IJB_led(int st) {
+S_INLINE void IJB_led(int st) {
 //  IJB_out(7, st != 0);
 }
-/*INLINE*/ int IJB_in() {
+/*S_INLINE*/ int IJB_in() {
   return io_get();
 }
 // out buffer
-/*INLINE*/ void IJB_out(int port, int st) {
+/*S_INLINE*/ void IJB_out(int port, int st) {
 }
-/*INLINE*/ int IJB_btn(int n) {
+/*S_INLINE*/ int IJB_btn(int n) {
   return 0;
 }
-INLINE int IJB_ana(int n) {
+S_INLINE int IJB_ana(int n) {
   return 0;
 }
-INLINE void IJB_clo() {
+S_INLINE void IJB_clo() {
   io_init();
 }
 
-INLINE int IJB_i2c(uint8 writemode, uint16* param) { // 0:success 1:io error 2:parm error
+S_INLINE int IJB_i2c(uint8 writemode, uint16* param) { // 0:success 1:io error 2:parm error
   return 1;
 }
