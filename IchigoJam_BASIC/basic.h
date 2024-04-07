@@ -406,17 +406,13 @@ static uint8 token_getChar();
 #ifdef USE_VOID_TOKEN_GET
 static void token_get(Token *);
 #define Token_get(x) token_get(&(x))
-#define Token_code token->code
-#define Token_value token->value
 INLINE int token_getCode() { Token t; Token_get(t); return t.code; }
 #else
 static Token token_get();
 #define Token_get(x) { (x) = token_get(); }
-#define Token_code token.code
-#define Token_value token.value
 #define token_getCode(x) token_get().code
 #endif
-static void token_back(); // INLINE -> size up
+static void token_back(); // S_INLINE -> size up
 static int16 token_getArrayIndex();
 static void token_end();
 S_INLINE void token_puts();
@@ -775,8 +771,16 @@ S_INLINE uint8 token_getCharWithSpace() { // 60byte増
 //#include <stdio.h>
 
 #ifdef USE_VOID_TOKEN_GET
+#define Token_code token->code
+#define Token_value token->value
+#define Token_object(x) (*(x))
+#define Token_return(x) return
 static void token_get(Token *token)
 #else
+#define Token_code token.code
+#define Token_value token.value
+#define Token_object(x) (x)
+#define Token_return(x) return (x)
 static Token token_get()
 #endif
 {
@@ -786,10 +790,8 @@ static Token token_get()
 //	printf("%d %d %d %d hit\n", (int)pc, (int)lasttoken, (int)lasttokenpc, bklasttoken.code);
 #ifdef USE_VOID_TOKEN_GET
 		*token = bklasttoken;
-		return;
-#else
-		return bklasttoken;
-#endif		
+#endif
+		Token_return(bklasttoken);
 	}
 //	printf("%d %d %d\n", (int)pc, (int)lasttoken, (int)lasttokenpc);
 #endif
@@ -893,7 +895,7 @@ static Token token_get()
 			}
 			if (hit) {
 				Token_code = i + N_TOKEN_OFFSET;
-//				return;
+//				Token_return(token);
 				goto RET;
 			}
 			ptoken += len;
@@ -921,19 +923,11 @@ static Token token_get()
 	}
 RET:
 #ifdef TOKEN_CACHE
-#ifdef USE_VOID_TOKEN_GET
-	bklasttoken = *token;
-#else
-	bklasttoken = token;
-#endif	
+	bklasttoken = Token_object(token);
 //	printf("%c %d %d push\n", *lasttoken, (int)pc, bklasttoken.code);
 	lasttokenpc = pc;
 #endif
-#ifdef USE_VOID_TOKEN_GET
-	return;
-#else
-	return token;
-#endif
+	Token_return(token);
 }
 static void token_back() {
 	pc = lasttoken;
