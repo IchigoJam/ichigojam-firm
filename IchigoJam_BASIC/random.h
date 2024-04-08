@@ -21,17 +21,17 @@ const unsigned int RNDN[] = {
 	88675123
 };
 */
-uint rndn[4];
+uint32 rndn[4];
 
-static inline uint rnd() {
-	uint t = rndn[0] ^ (rndn[0] << 11);
+static inline uint32 rnd() {
+	uint32 t = rndn[0] ^ (rndn[0] << 11);
 	rndn[0] = rndn[1];
 	rndn[1] = rndn[2];
 	rndn[2] = rndn[3];
 	return rndn[3] = (rndn[3] ^ (rndn[3] >> 19)) ^ (t ^ (t >> 8));
 }
 
-static inline void random_seed(int n) {
+static inline void random_seed(int32 n) {
 	rndn[0] = n;
 	rndn[1] = 362436069;
 	rndn[2] = 521288629;
