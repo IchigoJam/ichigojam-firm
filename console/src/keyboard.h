@@ -27,13 +27,10 @@ inline int key_btn(int n) {
   return 0;
 }
 
-char* keybuf = (char*)(ram + (OFFSET_RAM_KEYBUF + 1)); // kbhit[-1], len:[0], buf:[1-(KEY_BUF_LEN-1] // 24512+60 // 小さい！
-
 int key_getKey() {
   return getchar();
 }
 void key_clearKey() {
-  *keybuf = 0;
 }
 
 
