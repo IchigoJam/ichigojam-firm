@@ -51,6 +51,36 @@ virtual address	description
 x 110C-112B i2cbuf IoTコマンド (32byte) 1.3b2
 */
 
+#ifdef USE_RAM_STRUCT
+
+// z88dk-sccz80ではグローバル変数の宣言において以下の記法は
+// error: Expecting constant expressionエラーとなってしまう
+// 	char *p = (char *)(buf + 1);
+// 	char *p = ((char *)buf + 1);
+// しかし以下の記法は認められる（()の判定に問題があるようだ）
+//	char *p = (char *)buf + 1; // OK
+// 他に手段が無いため、RAM領域の構造体を用意することでこの問題を回避する
+
+struct ram_struct {
+	uint8 pcg[SIZE_RAM_PCG];
+	int16 var[(SIZE_RAM_VAR + 1) / sizeof(int16)];
+	uint8 vram[SIZE_RAM_VRAM];
+	char list[SIZE_RAM_LIST];
+	char keybuf[SIZE_RAM_KEYBUF];
+	char linebuf[SIZE_RAM_LINEBUF];
+	int16 i2cbuf[(SIZE_RAM_I2CBUF + 1) / sizeof(int16)];
+} ram;
+
+#define RAM_AREA ((uint8 *)&ram)
+#define RAM_PCG ram.pcg
+#define RAM_VAR ram.var
+#define RAM_VRAM ram.vram
+#define RAM_LIST ram.list
+#define RAM_KEYBUF ram.keybuf
+#define RAM_LINEBUF ram.linebuf
+#define RAM_I2CBUF ram.i2cbuf
+
+#else
 #if RAM_FIXED == 1
 
 // RAMの先頭に持っていく、#700 == 0x10000000
@@ -93,5 +123,7 @@ uint8 ram[SIZE_RAM] __attribute__ ((aligned(4)));
 
 //extern uint8 _ichigojam_ram[SIZE_RAM]; // RAM先頭に設置する
 //#define ram _ichigojam_ram
+
+#endif
 
 #endif
