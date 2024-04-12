@@ -406,7 +406,7 @@ static uint8 token_getChar();
 #ifdef USE_VOID_TOKEN_GET
 static void token_get(Token *);
 #define Token_get(x) token_get(&(x))
-INLINE int token_getCode() { Token t; Token_get(t); return t.code; }
+S_INLINE int token_getCode() { Token t; Token_get(t); return t.code; }
 #else
 static Token token_get();
 #define Token_get(x) { (x) = token_get(); }
