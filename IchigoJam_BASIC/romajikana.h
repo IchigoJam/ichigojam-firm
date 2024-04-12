@@ -14,7 +14,7 @@
 #define key_kana_buf1 _g.key_kana_buf_1
 #endif
 
-static inline int romajikana_input(int k) {
+S_INLINE int romajikana_input(int k) {
 	if (k >= 'a' && k <= 'z') {
 		k += 'A' - 'a';
 	}

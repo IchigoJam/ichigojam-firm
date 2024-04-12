@@ -35,11 +35,11 @@ static void video_init(void);
 static void video_on();
 static void video_off(int clkdiv);
 static int16 video_tick(int n);
-INLINE void video_clt();
+S_INLINE void video_clt();
 static void screen_clear(void);
 static void video_waitSync(uint);
 static void screen_putc(char c);
-INLINE void screen_puts(char* s);
+S_INLINE void screen_puts(char* s);
 static uint8* screen_gets();
 static uint8 screen_get(int x, int y);
 static uint8 screen_getCurrent();
@@ -63,7 +63,7 @@ extern volatile uint16 frames;
 // keyboard
 #ifdef KEYBOARD_USB
 void key_ping();
-inline static void key_tick();
+S_INLINE void key_tick();
 void key_tick2();
 #endif
 
@@ -123,11 +123,11 @@ uint8* const screen_pcg = ((uint8*)(ram + OFFSET_RAM_PCG)); // 同じ
 
 // screen
 
-static inline int16 video_tick(int n) {
+S_INLINE int16 video_tick(int n) {
 	//return (int16)(frames & 0x7fff); // 1.0.0b10 0x3fff -> 0x7fff
 	return (int16)((n ? _g.linecnt : frames) & 0x7fff); // 1.0.0b10 0x3fff -> 0x7fff
 }
-INLINE void video_clt() {
+S_INLINE void video_clt() {
 	frames = 0;
 	_g.linecnt = 0; // 1.4.0b03
 }
@@ -268,7 +268,7 @@ extern struct keyflg_def key_flg;
 #define PSG_RATIO 4
 #define VSYNC_0 ((VSYNC + 1) / PSG_RATIO - 1) // == (3056/8-1)
 
-INLINE void video_initTV(void) {
+S_INLINE void video_initTV(void) {
 	screen_clear();
 	video_on();
 }
@@ -276,7 +276,7 @@ INLINE void video_initTV(void) {
 void screen_clp() {
 	memcpy4(screen_pcg, CHAR_PATTERN + (0x100 - SIZE_PCG) * 8, SIZE_PCG * 8);
 }
-inline void video_init(void) {
+INLINE void video_init(void) {
 	
 //	LPC_IOCON->PIO0_8 = 0xd0; // pullup // 1.2b10 なぜあった?
 //	LPC_GPIO0->DIR &= ~(1 << 8); // 1.2b10 なぜあった?
@@ -288,11 +288,11 @@ inline void video_init(void) {
 }
 
 // uart
-static inline void uart_putc(char c);
+S_INLINE void uart_putc(char c);
 
 //  screen
 
-inline void screen_clear() {
+INLINE void screen_clear() {
 	vram = (uint8*)(ram + OFFSET_RAM_VRAM);
 	_g.cursorx = _g.cursory = 0;
 	memclear4(vram, SCREEN_W * SCREEN_H);
@@ -388,18 +388,18 @@ static uint8* screen_gets() {
 }
 //extern uint8 screen_get(int x, int y); // 効かない？
 
-static /*inline*/ uint8 screen_get(int x, int y) {
+static /*INLINE*/ uint8 screen_get(int x, int y) {
 	if (x < 0 || x >= SCREEN_W || y < 0 || y >= SCREEN_H)
 		return '\0';
 	return vram[y * SCREEN_W + x];
 }
-static inline uint8 screen_getCurrent() {
+S_INLINE uint8 screen_getCurrent() {
 	return screen_get(_g.cursorx, _g.cursory);
 }
 
 //#include <stdio.h>
 
-static inline void screen_locate(int x, int y) {
+S_INLINE void screen_locate(int x, int y) {
 	if (x < 0)
 		x = 0;
 	else if (x >= SCREEN_W)
@@ -694,12 +694,12 @@ static void screen_putc(char c) {
 		}
 	}
 }
-static inline void screen_puts(char* s) {
+S_INLINE void screen_puts(char* s) {
 	while (*s)
 		screen_putc(*s++);
 }
 
-static inline uint screen_pset(int x, int y, int cmd) { // point機能追加 1.3.2b19 cmd:0 reset, 1: pset, 2: xor, other: none
+S_INLINE uint screen_pset(int x, int y, int cmd) { // point機能追加 1.3.2b19 cmd:0 reset, 1: pset, 2: xor, other: none
 	/*
 	if (x >= 0 && x < _g.screenw && y >= 0 && y < _g.screenh) {
 		vram[x + y * _g.screenw] = 1;

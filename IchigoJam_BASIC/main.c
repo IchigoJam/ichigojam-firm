@@ -60,7 +60,7 @@ const uint16_t API[] = {
 };
 */
 
-INLINE int IJB_peek(int ad) {
+S_INLINE int IJB_peek(int ad) {
 	if (ad < 0) {
 		return 0;
 	} else if (ad < OFFSET_RAMROM) {
@@ -70,7 +70,7 @@ INLINE int IJB_peek(int ad) {
 	}
 	return 0;
 }
-INLINE void IJB_poke(int ad, int n) {
+S_INLINE void IJB_poke(int ad, int n) {
 	ad -= OFFSET_RAMROM;
 	if (ad >= 0 && ad < SIZE_RAM) {
 		ram[ad] = n;
@@ -78,7 +78,7 @@ INLINE void IJB_poke(int ad, int n) {
 	}
 }
 
-/*INLINE*/ int IJB_random(int n) {
+/*S_INLINE*/ int IJB_random(int n) {
 	uint r = rnd();
 	if (n <= 0) {
 		return 0;
@@ -88,7 +88,7 @@ INLINE void IJB_poke(int ad, int n) {
 	return (r >> 1) % n; // マイナスがでてしまう対処、udivが使われる div?? こっちの方が小さい
 	//	return calcMod(rnd() >> 1, n); // % これの方が大きい
 }
-INLINE void IJB_random_seed(int n) {
+S_INLINE void IJB_random_seed(int n) {
 	random_seed(n);
 }
 
@@ -128,14 +128,14 @@ STATIC void IJB_input(char** line) {
 #include <xprintf.h>
 #endif
 
-inline void IJB_bps(int uart, int i2c) {
+INLINE void IJB_bps(int uart, int i2c) {
 	uart_bps(uart);
 #ifdef ENABLE_I2C_BPS
 	i2c0_bps(i2c);
 #endif
 }
 
-INLINE void init() {
+S_INLINE void init() {
 	flash_init();
 #ifndef KEY_INIT_DELAY // for IchigoJam R
 	key_init();
