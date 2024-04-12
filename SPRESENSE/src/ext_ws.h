@@ -8,9 +8,9 @@ S_INLINE void ws_out(int port, int nled, int repeat) {
 		return;
 	/*
 	FUNC_WS_OUT_ASM ws_out_asm = (FUNC_WS_OUT_ASM)WS_OUT_ASM;
-	//ws_out_asm(-(nled * 3 + (--repeat << 16)), ram + OFFSET_RAM_VAR, 14); // v3
-	//ws_out_asm(-((nled * 3) | (--repeat << 16)), ram + OFFSET_RAM_VAR, 14); // v3
-	ws_out_asm(-nled * 3, ram + OFFSET_RAM_VAR, repeat); // v3 ... うまくいかないのでしかたなく
+	//ws_out_asm(-(nled * 3 + (--repeat << 16)), RAM_VAR, 14); // v3
+	//ws_out_asm(-((nled * 3) | (--repeat << 16)), RAM_VAR, 14); // v3
+	ws_out_asm(-nled * 3, RAM_VAR, repeat); // v3 ... うまくいかないのでしかたなく
 	*/
 }
 
