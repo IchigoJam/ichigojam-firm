@@ -5,25 +5,25 @@
 
 #include <stdio.h>
 
-static inline uint key_getKeyboardID() {
+S_INLINE uint key_getKeyboardID() {
   return 0;
 }
 
 struct keyflg_def key_flg;
 uint8 displaymode;
 
-static inline void key_init() {
+S_INLINE void key_init() {
 }
 
-static inline void key_send_reset() {
+S_INLINE void key_send_reset() {
 }
 
-INLINE void key_enable(uint8 b) {
+S_INLINE void key_enable(uint8 b) {
 //  key_enable_flg = b;
 }
 //void uart_checker();
 
-inline int key_btn(int n) {
+INLINE int key_btn(int n) {
   return 0;
 }
 
@@ -37,11 +37,11 @@ void key_clearKey() {
 }
 
 
-INLINE void uart_init() {
+S_INLINE void uart_init() {
   _g.uartmode_txd = 1;
 }
 
-inline void IJB_uart(int16 txd, int16 rxd) {
+INLINE void IJB_uart(int16 txd, int16 rxd) {
 }
 
 void uart_putc(char c) { // 1.1b7 uart3でバッファモード, b12 バッファモードやめる？
@@ -59,7 +59,7 @@ void put_chr(char c) {
 }
 
 // basic interface
-inline int stopExecute() {
+INLINE int stopExecute() {
   return _g.key_flg_esc;
 }
 

@@ -35,64 +35,64 @@ extern int bootflg;
 STATIC void put_chr(char c);
 STATIC void put_str(const char* s);
 
-INLINE int stopExecute();
+S_INLINE int stopExecute();
 
 static int basic_execute(char* commandline);
-INLINE void basic_init();
-INLINE int basic_listSize();
+S_INLINE void basic_init();
+S_INLINE int basic_listSize();
 
 static int IJB_save(int n, uint8* list, int size); // 0:ok
 static int IJB_load(int n, uint8* list, int sizelimit, int init); // ret:size if:-1 _g.err
 static int i2c0_init(); /* Initialize I2C module  0:ok 1:_g.err */
-INLINE int IJB_file();
+S_INLINE int IJB_file();
 
 static int IJB_wait(int n, int active);
-//INLINE int IJB_waitLittle(int n);
-INLINE void IJB_led(int on);
-/* INLINE */ int IJB_random(int n);
-INLINE void IJB_random_seed(int n);
+//S_INLINE int IJB_waitLittle(int n);
+S_INLINE void IJB_led(int on);
+/* S_INLINE */ int IJB_random(int n);
+S_INLINE void IJB_random_seed(int n);
 //void IJB_motor(int ch, int n);
-/*INLINE*/ int IJB_in();
-INLINE int IJB_ana(int n);
-/*INLINE*/ void IJB_out(int port, int st);
-/*INLINE*/ void IJB_pwm(int port, int plen, int len);
-/*INLINE*/ int IJB_btn(int n); // -4byte
-INLINE void IJB_clo();
+/*S_INLINE*/ int IJB_in();
+S_INLINE int IJB_ana(int n);
+/*S_INLINE*/ void IJB_out(int port, int st);
+/*S_INLINE*/ void IJB_pwm(int port, int plen, int len);
+/*S_INLINE*/ int IJB_btn(int n); // -4byte
+S_INLINE void IJB_clo();
 static void IJB_sleep();
-INLINE void IJB_reset();
+S_INLINE void IJB_reset();
 static void IJB_input(char** line);
-INLINE void IJB_uart(int16 txd, int16 rxd);
-INLINE void IJB_bps(int uart, int i2c);
-INLINE int IJB_i2c(uint8 writemode, uint16* param); // -1:ad error 1:ok 0:i2c error
+S_INLINE void IJB_uart(int16 txd, int16 rxd);
+S_INLINE void IJB_bps(int uart, int i2c);
+S_INLINE int IJB_i2c(uint8 writemode, uint16* param); // -1:ad error 1:ok 0:i2c error
 
-INLINE int IJB_peek(int ad);
-INLINE void IJB_poke(int ad, int n);
-INLINE int IJB_usr(int ad, int n);
-INLINE void IJB_lcd(uint mode); // 1.2b32
+S_INLINE int IJB_peek(int ad);
+S_INLINE void IJB_poke(int ad, int n);
+S_INLINE int IJB_usr(int ad, int n);
+S_INLINE void IJB_lcd(uint mode); // 1.2b32
 #ifndef NO_KBD_COMMAND
-INLINE void IJB_kbd(uint mode); // 1.5b1
+S_INLINE void IJB_kbd(uint mode); // 1.5b1
 #ifdef VERSION15
-INLINE void IJB_dac(int port, int val); // 1.5
+S_INLINE void IJB_dac(int port, int val); // 1.5
 #endif
 #endif
 
 // keyboard
 int key_getKey(); // from keybuffer, ret 0 if nul -> ret -1 if null 1.2b19
 static void key_clearKey();
-static inline uint key_getKeyboardID();
+S_INLINE uint key_getKeyboardID();
 
 // psg
-INLINE void psg_playMML(char* mml);
-INLINE void psg_beep(int tone, int len);
-INLINE void psg_tempo(int tempo);
-INLINE int psg_sound();
+S_INLINE void psg_playMML(char* mml);
+S_INLINE void psg_beep(int tone, int len);
+S_INLINE void psg_tempo(int tempo);
+S_INLINE int psg_sound();
 
 // screen
 static void screen_clear();
 static void video_on();
 static void video_off(int clkdiv);
 static short video_tick(int n);
-INLINE void video_clt();
+S_INLINE void video_clt();
 static void screen_clp();
 static uint8 screen_get(int x, int y);
 static uint8 screen_getCurrent();
@@ -115,14 +115,14 @@ static void iot_out2(int ad, int len, int flash);
 
 #endif
 
-static inline void ws_out(int port, int nled, int reapeat);
+S_INLINE void ws_out(int port, int nled, int reapeat);
 
 // util -----------------------------------------------------
 
 //#define clearMemory(p, len) memset(p, 0, len)
 
 
-INLINE uint8 basic_toupper(uint8 c) {
+S_INLINE uint8 basic_toupper(uint8 c) {
 	if (c >= 'a' && c <= 'z') {
 		return c & 0b1011111; // 速度一緒 なぜか小文字のほうが速い
 //		return c + ('A' - 'a');
@@ -186,12 +186,12 @@ static void put_strmem(int n, int m) {
 }
 
 
-extern /*inline*/ int sin360(int deg); // +168byte, APIから使えるようにして +4byte
+extern /*INLINE*/ int sin360(int deg); // +168byte, APIから使えるようにして +4byte
 /*
 // -- sin/cos/tan from @yrm
 int32 sin32(int32 s);
-INLINE int32 cos32(int32 s);
-//INLINE int32 tan32(int32 s);
+S_INLINE int32 cos32(int32 s);
+//S_INLINE int32 tan32(int32 s);
 int atan2(int y, int x);
 */
 
@@ -255,13 +255,13 @@ if (tokenid == STRING || tokenid == REM) {
 }
 */
 
-INLINE int16 list_getNumber(uint16 index) {
+S_INLINE int16 list_getNumber(uint16 index) {
 	return *(int16*)(list + index);
 }
-INLINE uint8 list_getLength(uint16 index) {
+S_INLINE uint8 list_getLength(uint16 index) {
 	return *(uint8*)(list + index + 2);
 }
-INLINE void list_setNumber(uint16 index, int16 num) {
+S_INLINE void list_setNumber(uint16 index, int16 num) {
 	*(int16*)(list + index) = num;
 }
 void list_setLength(uint16 index, uint8 num) {
@@ -283,7 +283,7 @@ static int16 list_findGoto(int16 number) {
 		index = -1;
 	return index;
 }
-static inline void list_setPC(int n) {
+S_INLINE void list_setPC(int n) {
 	pc = list + n + 3;
 	/*
 	pcnext = pc + *(pc - 1) + 4;
@@ -335,79 +335,79 @@ static void command_error(int erridx); // no return -> HardFault
 static void command_rem();
 static void command_let(char token);
 static int command_let2(int var);
-INLINE void command_edit(int number);
-INLINE void command_clv();
-static void command_if(); // INLINE化すると 4byte増
-static void command_for(); // INLINEで26byte増
+S_INLINE void command_edit(int number);
+S_INLINE void command_clv();
+static void command_if(); // S_INLINE化すると 4byte増
+static void command_for(); // S_INLINEで26byte増
 static void command_next();
-INLINE void command_goto();
-INLINE void command_gosub();
-INLINE void command_return();
-INLINE void command_cont();
-static void command_print(); // 元はINLINEではなかった
-INLINE void command_input();
-INLINE void command_new();
-INLINE void command_list();
-INLINE void command_run();
-INLINE void command_end();
+S_INLINE void command_goto();
+S_INLINE void command_gosub();
+S_INLINE void command_return();
+S_INLINE void command_cont();
+static void command_print(); // 元はS_INLINEではなかった
+S_INLINE void command_input();
+S_INLINE void command_new();
+S_INLINE void command_list();
+S_INLINE void command_run();
+S_INLINE void command_end();
 static void command_load(int mode);
-INLINE void command_save();
-INLINE void command_files();
-INLINE void command_led();
-INLINE void command_out();
-INLINE void command_pwm();
-INLINE void command_clo();
-INLINE void command_wait();
-//INLINE void command_lwait(); // ver 1.2
-INLINE void command_cls();
-INLINE void command_locate();
-//INLINE void command_motor();
-static void command_renum(); // INLINEで4byte増える
-INLINE void command_sleep(); // INLINEで8byte増
-INLINE void command_reset(); // INLINEで増
-INLINE void command_bps();
-INLINE void command_clt();
-INLINE void command_play();
-INLINE void command_beep(); // INLINEで4増
-INLINE void command_tempo();
-INLINE void command_video();
-INLINE void command_scroll();
-INLINE void command_clp();
-INLINE void command_poke();
-INLINE void command_copy();
-INLINE void command_clk();
-INLINE void command_help();
-INLINE void command_uart();
-INLINE void command_srnd();
-INLINE void command_draw();
-INLINE void command_at();
-INLINE void command_ok();
+S_INLINE void command_save();
+S_INLINE void command_files();
+S_INLINE void command_led();
+S_INLINE void command_out();
+S_INLINE void command_pwm();
+S_INLINE void command_clo();
+S_INLINE void command_wait();
+//S_INLINE void command_lwait(); // ver 1.2
+S_INLINE void command_cls();
+S_INLINE void command_locate();
+//S_INLINE void command_motor();
+static void command_renum(); // S_INLINEで4byte増える
+S_INLINE void command_sleep(); // S_INLINEで8byte増
+S_INLINE void command_reset(); // S_INLINEで増
+S_INLINE void command_bps();
+S_INLINE void command_clt();
+S_INLINE void command_play();
+S_INLINE void command_beep(); // S_INLINEで4増
+S_INLINE void command_tempo();
+S_INLINE void command_video();
+S_INLINE void command_scroll();
+S_INLINE void command_clp();
+S_INLINE void command_poke();
+S_INLINE void command_copy();
+S_INLINE void command_clk();
+S_INLINE void command_help();
+S_INLINE void command_uart();
+S_INLINE void command_srnd();
+S_INLINE void command_draw();
+S_INLINE void command_at();
+S_INLINE void command_ok();
 
-INLINE void command_lcd();
+S_INLINE void command_lcd();
 //#ifndef NO_KBD_COMMAND
 #ifdef VERSION15
-INLINE void command_kbd();
-INLINE void command_dac();
+S_INLINE void command_kbd();
+S_INLINE void command_dac();
 #endif
 #ifdef EXT_SENSEHAT
-INLINE void command_sh_mlsp();
+S_INLINE void command_sh_mlsp();
 #endif
 
 #ifdef EXT_IOT
-INLINE void command_iot_out();
+S_INLINE void command_iot_out();
 #endif
-INLINE void command_ws_out(int port);
+S_INLINE void command_ws_out(int port);
 
 
 // token -----------------------------------------------------------------
 
 static uint8 token_getChar();
-//INLINE uint8 token_getCharWithSpace(); // 1.1b12 - 1.2b52廃止
+//S_INLINE uint8 token_getCharWithSpace(); // 1.1b12 - 1.2b52廃止
 static Token token_get();
-static void token_back(); // INLINE -> size up
+static void token_back(); // S_INLINE -> size up
 static int16 token_getArrayIndex();
 static void token_end();
-INLINE void token_puts();
+S_INLINE void token_puts();
 static char* token_skipstr();
 static int16 token_expression();
 static int16 token_expression1();
@@ -427,7 +427,7 @@ static int16 token_expression5();
 static void basic_clearVars() {
 	memclear((uint8*)var, (IJB_SIZEOF_ARRAY + IJB_SIZEOF_VAR) * 2);
 }
-INLINE void basic_init() {
+S_INLINE void basic_init() {
 	basic_clearVars();
 	memclear4((uint8*)list, IJB_SIZEOF_LIST);
 	pc = pcbreak = NULL;
@@ -436,7 +436,7 @@ INLINE void basic_init() {
 	extension_init();
 	#endif
 }
-INLINE int basic_listSize() {
+S_INLINE int basic_listSize() {
 	return _g.listsize;
 }
 
@@ -625,7 +625,7 @@ int basic_execute(char* commandline) {
 	return BASIC_RESULT_EXECUTE;
 }
 
-INLINE void command_edit(int number) {
+S_INLINE void command_edit(int number) {
 	if (number <= 0 || (pc >= list && pc < list + IJB_SIZEOF_LIST)) { // プログラム実行時は不可
 		command_error(ERR_SYNTAX_ERROR);
 		return;
@@ -753,7 +753,7 @@ static uint8 token_getChar() {
 	}
 }
 /* // 1.1b12 で導入、1.2b52 で廃止
-INLINE uint8 token_getCharWithSpace() { // 60byte増
+S_INLINE uint8 token_getCharWithSpace() { // 60byte増
 	uint8 c = *pc;
 	if (c == ':') // || c == '\'')
 		return 0;
@@ -952,7 +952,7 @@ static void token_end() {
 	}
 	*/
 }
-INLINE void token_puts() {
+S_INLINE void token_puts() {
 //	if (*pc == '"') // 1.2beta9
 //		pc++;
 	while (*pc && *pc != '"') {
@@ -1803,7 +1803,7 @@ void command_next() {
 	}
 	var[v] += step;
 }
-INLINE void command_goto() {
+S_INLINE void command_goto() {
 	int n = token_expression(); // 式だとrenumで都合が悪い
 	IJB_ERR_CHK();
 	n = list_findGoto(n);
@@ -1814,7 +1814,7 @@ INLINE void command_goto() {
 	token_end();
 	list_setPC(n);
 }
-INLINE void command_gosub() {
+S_INLINE void command_gosub() {
 	if (_g.ngosubstack >= IJB_SIZEOF_GOSUB_STACK) {
 //		command_error(ERR_TOO_MANY_NESTED_GOSUBS);
 		command_error(ERR_STACK_OVERFLOW);
@@ -1837,7 +1837,7 @@ INLINE void command_gosub() {
 
 	list_setPC(n);
 }
-INLINE void command_return() {
+S_INLINE void command_return() {
 	if (_g.ngosubstack == 0) {
 //		command_error(ERR_RETURN_WITHOUT_GOSUB);
 		command_error(ERR_NOT_MATCH);
@@ -1850,7 +1850,7 @@ INLINE void command_return() {
 	pc = gosubstack[--_g.ngosubstack];
 #endif
 }
-INLINE void command_cont() {
+S_INLINE void command_cont() {
 	token_end();
 	if (pc < list || pc >= list + 1026) {
 		pc = pcbreak;
@@ -2098,7 +2098,7 @@ char* bkp_input;
 int16 v_input;
 #endif
 
-INLINE void command_input() { // 配列の場合2回評価される問題あり? -> 1.2b48で解消? INPUT[0]でエラーバグ修正
+S_INLINE void command_input() { // 配列の場合2回評価される問題あり? -> 1.2b48で解消? INPUT[0]でエラーバグ修正
 	Token t = token_get();
 	if (t.code == TOKEN_STRING) {
 		token_puts();
@@ -2165,7 +2165,7 @@ static void command_input2(char* line) {
 }
 #endif
 
-INLINE void command_new() {
+S_INLINE void command_new() {
 	token_end();
 	IJB_ERR_CHK();
 	memclear4((uint8*)list, IJB_SIZEOF_LIST);
@@ -2181,7 +2181,7 @@ uint bk_max_list;
 int bk_min_list;
 #endif
 
-INLINE void command_list() {
+S_INLINE void command_list() {
 	#ifdef IJB_DONT_LOOP
 	continue_list = 0;
 	#endif
@@ -2339,7 +2339,7 @@ int command_list_next() {
 
 
 //renum 番号置き換え対応版 500byte増える -> 勘違い、intを割り算してたからだった
-static inline int16 list_findIndex(int16 number) { // for command_renum
+S_INLINE int16 list_findIndex(int16 number) { // for command_renum
 	int index = 0;
 	int cnt = 0;
 	for (;;) {
@@ -2351,7 +2351,7 @@ static inline int16 list_findIndex(int16 number) { // for command_renum
 	}
 	return cnt;
 }
-static inline void command_renum2(int index, int n, int step) {
+S_INLINE void command_renum2(int index, int n, int step) {
 	char* bkpc = pc;
 
 	pc = (char*)(list + index + 3);
@@ -2455,14 +2455,12 @@ void command_renum() {
 	}
 
 	int index = 0;
-	int n = start;
 	for (;;) {
 		int num = list_getNumber(index);
 		if (num == 0)
 			break;
 		// GOTO / GOSUB の行番号付け替え必要!! 0.9.5 式を使ったので、完全な付け替えは不可能
 		command_renum2(index, start, step);
-		n += step;
 		index += list_getLength(index) + 4;
 	}
 	index = 0;
@@ -2490,7 +2488,7 @@ void command_renum() {
 	*/
 }
 
-INLINE void command_run() {
+S_INLINE void command_run() {
 	//printf("%d %x\n", SIZE_RAM, SIZE_RAM);
 	token_end();
 
@@ -2508,7 +2506,7 @@ INLINE void command_run() {
 		pc = pcbreak = NULL;
 	}
 }
-INLINE void command_end() {
+S_INLINE void command_end() {
 	token_end();
 	pc = pcbreak = NULL;
 }
@@ -2584,7 +2582,7 @@ void command_load(int command) {
 		command_error(ERR_FILE_ERROR);
 	}
 }
-INLINE void command_save() {
+S_INLINE void command_save() {
 	int16 n = IJB_file();
 //	if (token_getChar()) {
 	int code = token_get().code; // ELSE対策 1.2b61 +8byte
@@ -2632,7 +2630,7 @@ int16 bk_startn_files = 0;
 int16 bk_endn_files = 0;
 #endif
 
-INLINE void command_files() {
+S_INLINE void command_files() {
 	#ifdef IJB_DONT_LOOP
 	continue_files = 0;
 	#endif
@@ -2776,13 +2774,13 @@ int command_files_next() {
 #endif
 
 //
-INLINE void command_led() {
+S_INLINE void command_led() {
 	int16 n = token_expression();
 	IJB_ERR_CHK();
 	IJB_led(n);
 	token_end();
 }
-INLINE void command_out() {
+S_INLINE void command_out() {
 	int16 n = token_expression();
 	IJB_ERR_CHK();
 	int code = token_get().code;
@@ -2796,7 +2794,7 @@ INLINE void command_out() {
 	}
 	token_end();
 }
-INLINE void command_pwm() {
+S_INLINE void command_pwm() {
 	int16 n = token_expression();
 	IJB_ERR_CHK();
 	int code = token_get().code;
@@ -2808,17 +2806,17 @@ INLINE void command_pwm() {
 	int16 l = token_option1(0);
 	IJB_pwm(n, m, l);
 }
-INLINE void command_clo() {
+S_INLINE void command_clo() {
 	IJB_clo();
 	token_end();
 }
-INLINE void command_wait() {
+S_INLINE void command_wait() {
 	int16 n = token_expression();
 	int m = token_option1(1);
 	IJB_wait(n, m);
 }
 /*
-INLINE void command_lwait() {
+S_INLINE void command_lwait() {
 	int16 n = token_expression();
 	if (_g.err)
 		return;
@@ -2826,20 +2824,20 @@ INLINE void command_lwait() {
 	IJB_waitLittle(n);
 }
 */
-INLINE void command_cls() {
+S_INLINE void command_cls() {
 	token_end();
 	screen_clear();
 }
-INLINE void command_clt() {
+S_INLINE void command_clt() {
 	token_end();
 	video_waitSync(1);
 	video_clt();
 }
-INLINE void command_clv() {
+S_INLINE void command_clv() {
 	token_end();
 	basic_clearVars();
 }
-INLINE void command_locate() {
+S_INLINE void command_locate() {
 	int16 x = token_expression();
 	IJB_ERR_CHK();
 	int code = token_get().code;
@@ -2885,20 +2883,20 @@ void command_motor() {
 	token_end();
 }
 */
-INLINE void command_sleep() {
+S_INLINE void command_sleep() {
 	IJB_sleep();
 	token_end();
 }
-INLINE void command_reset() {
+S_INLINE void command_reset() {
 	IJB_reset();
 }
-INLINE void command_bps() {
+S_INLINE void command_bps() {
 	int n = token_expression();
 	// 1.2b56 I2C BPS
 	int m = token_option1(0);
 	IJB_bps(n, m);
 }
-INLINE void command_play() {
+S_INLINE void command_play() {
 	/*
 	Token t = token_get();
 	if (t.code != TOKEN_STRING) {
@@ -2927,7 +2925,7 @@ INLINE void command_play() {
 	token_end();
 }
 
-INLINE void command_beep() {
+S_INLINE void command_beep() {
 	int16 len = 3;
 	int16 tone = 10;
 //	if (token_getChar()) {
@@ -2947,13 +2945,13 @@ INLINE void command_beep() {
 	token_end();
 	psg_beep(tone, len); // default, psg_beep(10, 3);
 }
-INLINE void command_tempo() {
+S_INLINE void command_tempo() {
 	int16 tempo = token_expression();
 	IJB_ERR_CHK();
 	token_end();
 	psg_tempo(tempo);
 }
-INLINE void command_video() {
+S_INLINE void command_video() {
 	int16 video = token_expression();
 	// 1.1b3
 	int clkdiv = token_option1(1);
@@ -2984,13 +2982,13 @@ INLINE void command_video() {
 		video_off(clkdiv);
 	}
 }
-INLINE void command_scroll() {
+S_INLINE void command_scroll() {
 	int16 dir = token_expression();
 	IJB_ERR_CHK();
 	token_end();
 	screen_scroll(dir);
 }
-INLINE void command_poke() {
+S_INLINE void command_poke() {
 	int16 n1 = token_expression();
 	IJB_ERR_CHK();
 	int code = token_get().code;
@@ -3015,7 +3013,7 @@ INLINE void command_poke() {
 	}
 }
 /*
-INLINE void command_pset() {
+S_INLINE void command_pset() {
 	int16 x = token_expression();
 	if (_g.err)
 		return;
@@ -3046,7 +3044,7 @@ INLINE void command_pset() {
 	token_end();
 }
 */
-INLINE void command_copy() {
+S_INLINE void command_copy() {
 	int16 dst = token_expression();
 	IJB_ERR_CHK();
 	int code = token_get().code;
@@ -3077,11 +3075,11 @@ INLINE void command_copy() {
 	}
 	token_end();
 }
-INLINE void command_clp() {
+S_INLINE void command_clp() {
 	screen_clp();
 	token_end();
 }
-INLINE void command_clk() {
+S_INLINE void command_clk() {
 	key_clearKey();
 	token_end();
 }
@@ -3095,7 +3093,7 @@ INLINE void command_clk() {
 #C00-#FFF	プログラム（行番号(2byte)、サイズ(1byte)、テキスト）
 #1000-		キーバッファ（・・・これとは限らないことにしよう、プログラム領域拡大予約のため） // b16
 */
-INLINE void command_help() {
+S_INLINE void command_help() {
 //	put_str("MEM MAP\n#000 CHAR\n#700 PCG\n#800 VAR\n#900 VRAM\n#C00 LIST\n"); // b14 一時的に削除 ver 1.1正式版
 	put_str("#000 CHAR\n#700 PCG\n#800 VAR\n#900 VRAM\n#C00 LIST\n"); // 1.2b58, 1.3b4
 //	put_str("MEM MAP\n#000 CHAR\n#700 PCG\n#800 VAR\n#900 VRAM\n#C00 LIST\n"); // 1.2b62
@@ -3108,19 +3106,19 @@ INLINE void command_help() {
 	token_end();
 }
 
-INLINE void command_srnd() {
+S_INLINE void command_srnd() {
 	int16 n = token_expression();
 	IJB_ERR_CHK();
 	token_end();
 	IJB_random_seed(n);
 }
 
-INLINE void command_uart() {
+S_INLINE void command_uart() {
 	int16 n = token_expression();
 	int16 m = token_option1(1);
 	IJB_uart(n, m);
 }
-INLINE void command_at() {
+S_INLINE void command_at() {
 //	while (*pc && *pc != ':' && *pc != '\'') {
 	while (*pc && *pc != ':') { // 1.2b40
 		pc++;
@@ -3128,7 +3126,7 @@ INLINE void command_at() {
 	token_end();
 }
 
-INLINE void command_lcd() { // 1.2b32, 1.3.2b12 contrast 292->248 +44byte
+S_INLINE void command_lcd() { // 1.2b32, 1.3.2b12 contrast 292->248 +44byte
 	uint n = !_g.display_mode;
 	int code = token_get().code; // ELSE対策 1.2b61 +8byte
 	token_back();
@@ -3148,7 +3146,7 @@ INLINE void command_lcd() { // 1.2b32, 1.3.2b12 contrast 292->248 +44byte
 	IJB_lcd(n);
 }
 
-INLINE void command_ok() { // 1.2b42 表示オフ追加、b53で OK0からOK2に変更
+S_INLINE void command_ok() { // 1.2b42 表示オフ追加、b53で OK0からOK2に変更
 	int n = 0;
 	if (token_getChar()) {
 //		n = !token_expression(); // 1.2b42 OK0で表示OFF
@@ -3220,7 +3218,7 @@ int sin(int deg) { // 680, 20byte多いけど、高速 (int16にすると12byte�
 */
 
 /*
-static inline int sin(int deg) { // 700
+S_INLINE int sin(int deg) { // 700
 	int x = 0;
 	int y = 0;
 	int v = 37000000;
@@ -3287,10 +3285,10 @@ int32 sin32(int32 s) {
 //	return (y / 2120080) * pm; // +-1,000
 }
 
-INLINE int32 cos32(int32 s) {
+S_INLINE int32 cos32(int32 s) {
 	return sin32(s + 90);
 }
-INLINE int32 tan32(int32 s) {
+S_INLINE int32 tan32(int32 s) {
 	int32 c = cos32(s);
 	return c == 0 ? INT32_MAX : sin32(s) * 10000 / c; // +-10,000
 //	return c == 0 ? INT32_MAX : sin32(s) * 1000 / c; // +-1,000
@@ -3332,7 +3330,7 @@ int atan2(int y, int x) {
 */
 
 // line
-INLINE void command_draw() { // +284byte
+S_INLINE void command_draw() { // +284byte
 	int pos[5];
 	int i;
 	for (i = 0; i < 5; i++) {
@@ -3360,7 +3358,7 @@ INLINE void command_draw() { // +284byte
 }
 
 #ifdef EXT_SENSEHAT
-INLINE void command_sh_mlsp() {
+S_INLINE void command_sh_mlsp() {
 printf("mlsp\n");
 	int x = token_expression();
 	printf("%d\n", x);
@@ -3388,7 +3386,7 @@ printf("mlsp %d,%d,%d\n", x, y, z);
 #endif
 
 #ifdef EXT_IOT
-INLINE void command_iot_out() {
+S_INLINE void command_iot_out() {
 	int n = token_expression();
 	IJB_ERR_CHK();
 
@@ -3408,7 +3406,7 @@ INLINE void command_iot_out() {
 }
 #endif
 
-INLINE void command_ws_out(int port) {
+S_INLINE void command_ws_out(int port) {
 	//int p = token_expression();
 	int n = token_expression();
 	int m = token_option1(1);
@@ -3417,11 +3415,11 @@ INLINE void command_ws_out(int port) {
 
 #ifndef NO_KBD_COMMAND
 #ifdef VERSION15
-INLINE void command_kbd() {
+S_INLINE void command_kbd() {
 	int n = token_expression();
 	IJB_kbd(n);
 }
-INLINE void command_dac() {
+S_INLINE void command_dac() {
 	int16 n1 = token_expression();
 	IJB_ERR_CHK();
 	int code = token_get().code;
