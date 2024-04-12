@@ -273,21 +273,16 @@ mv ichigojam.bin ../bin/ichigojam.bin
 #define STRING2(s) STRING(s)
 #define STRING(str) #str
 
-typedef signed char int8;
-typedef signed short int16;
-typedef signed int int32;
-typedef unsigned char uint8;
-typedef unsigned short uint16;
-typedef unsigned int uint32;
+#include <stdint.h>
+typedef int8_t int8;
+typedef int16_t int16;
+typedef int32_t int32;
+typedef uint8_t uint8;
+typedef uint16_t uint16;
+typedef uint32_t uint32;
 typedef unsigned int uint;
-typedef unsigned long long uint64;
-//#define INT32_MAX 0x7fff
-
-#ifdef C99
-#define pint uintptr_t
-#else
-#define pint int
-#endif
+typedef uint64_t uint64;
+typedef uintptr_t pint;
 
 #ifndef NULL
 #define NULL 0
