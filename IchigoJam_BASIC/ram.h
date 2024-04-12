@@ -77,6 +77,15 @@ uint8 ram[SIZE_RAM] __attribute__ ((aligned(4)));
 
 #endif
 
+#define RAM_AREA ram
+#define RAM_PCG (RAM_AREA + OFFSET_RAM_PCG)
+#define RAM_VAR (RAM_AREA + OFFSET_RAM_VAR)
+#define RAM_VRAM (RAM_AREA + OFFSET_RAM_VRAM)
+#define RAM_LIST (RAM_AREA + OFFSET_RAM_LIST)
+#define RAM_KEYBUF (RAM_AREA + OFFSET_RAM_KEYBUF)
+#define RAM_LINEBUF (RAM_AREA + OFFSET_RAM_LINEBUF)
+#define RAM_I2CBUF (RAM_AREA + OFFSET_RAM_I2CBUF)
+
 // セクション頭に持っていくと容量オーバーする
 //uint8_t ram[SIZE_RAM] __attribute__((section(".ichigojam_ram")));
 //uint8_t ram[SIZE_RAM] __attribute__((section(".bss")));

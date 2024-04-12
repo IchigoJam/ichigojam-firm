@@ -174,9 +174,9 @@ STATIC void put_str(const char* s) {
 }
 static void put_strmem(int n, int m) {
 	if (n >= OFFSET_RAMROM) {
-		char* s = (char*)(ram + n - OFFSET_RAMROM);
+		char* s = (char*)(RAM_AREA + n - OFFSET_RAMROM);
 		for (;;) {
-			if (*s == '"' || *s == '\0' || m == 0 || s >= (char*)ram + SIZE_RAM)
+			if (*s == '"' || *s == '\0' || m == 0 || s >= (char*)RAM_AREA + SIZE_RAM)
 				break;
 			put_chr(*s);
 			s++;
@@ -200,7 +200,7 @@ int atan2(int y, int x);
 #include "ram.h"
 
 //char list[IJB_SIZEOF_LIST] __attribute__ ((aligned(4))); // プログラムリスト 文字のまま格納 4byte align 必要 to write flash
-char* const list = (char*)ram + OFFSET_RAM_LIST;
+char* const list = (char*)RAM_LIST;
 //		{
 //			int16 linenum;			行番号 1-32767  行番号=0 プログラムの末尾、末尾も兼ねる
 //			uint8 n;				ステートメントのバイト数 0-254 // 必ず 2の倍数
@@ -241,7 +241,7 @@ Token bklasttoken;
 #endif
 
 //int16 var[IJB_SIZEOF_ARRAY + IJB_SIZEOF_VAR];		// 変数 [0]-[IJB_SIZEOF_ARRAY-1], A-Z
-int16* const var = (int16*)(ram + OFFSET_RAM_VAR);
+int16* const var = (int16*)RAM_VAR;
 
 
 /*
@@ -1195,7 +1195,7 @@ static int16 token_opt1() {
 	return v;
 }
 //#define LIMIT_POS_CALCSTACK (ram + SIZE_RAM + 288 * 2) // 2段分確保 P=PEEK([0])でエラー
-#define LIMIT_POS_CALCSTACK (ram + SIZE_RAM + 288 * 1) // 1段分確保
+#define LIMIT_POS_CALCSTACK (RAM_AREA + SIZE_RAM + 288 * 1) // 1段分確保
 
 static int16 token_expression5() {
 	Token t = token_get();
@@ -1305,10 +1305,10 @@ static int16 token_expression5() {
 		case TOKEN_LEN: {
 			int16 n = token_paren1();
 			if (n >= OFFSET_RAMROM) {
-				char* s = (char*)(ram + n - OFFSET_RAMROM);
+				char* s = (char*)(RAM_AREA + n - OFFSET_RAMROM);
 				n = 0;
 				for (;;) {
-					if (*s == '"' || *s == '\0' || s >= (char*)ram + SIZE_RAM)
+					if (*s == '"' || *s == '\0' || s >= (char*)RAM_AREA + SIZE_RAM)
 						break;
 					s++;
 					n++;
@@ -1379,7 +1379,7 @@ static int16 token_expression5() {
 		case TOKEN_ASC: {
 	//		int16 v = token_paren1();
 	//		if (v >= OFFSET_RAMROM) {
-	//			v = *(char*)(ram + v - OFFSET_RAMROM);
+	//			v = *(char*)(RAM_AREA + v - OFFSET_RAMROM);
 	//		} else {
 	//			v = 0;
 	//		}
@@ -1512,7 +1512,7 @@ static int16 token_expression5() {
 							n[3] = n[4] = 0;
 						}
 						n[2] = 1;
-						ram[OFFSET_RAM_I2CBUF] = n[1];
+						RAM_AREA[OFFSET_RAM_I2CBUF] = n[1];
 						n[1] = OFFSET_RAM_I2CBUF + OFFSET_RAMROM;
 						break;
 					}
@@ -1533,7 +1533,7 @@ static int16 token_expression5() {
 			return res;
 		}
 		case TOKEN_STRING: { // ver 1.2
-			return token_skipstr() - (char*)ram + OFFSET_RAMROM;
+			return token_skipstr() - (char*)RAM_AREA + OFFSET_RAMROM;
 		}
 		case TOKEN_AT: { // ver 1.2b8
 			int16 index = 0;
@@ -2476,7 +2476,7 @@ void command_renum() {
 	}
 	/*
 	printf("LIST listsize: %d\n", _g.listsize);
-	char* p = (char*)(ram + OFFSET_RAM_LIST);
+	char* p = (char*)RAM_LIST;
 	for (int i = 0; i < 100; i++) {
 		char c = *(p + i);
 		if (c < 0x20)
@@ -2918,7 +2918,7 @@ S_INLINE void command_play() {
 	if (code != TOKEN_NULL && code != TOKEN_ELSE) {
 		int16 n = token_expression();
 		if (n >= OFFSET_RAMROM) {
-			mml = (char*)(ram + n - OFFSET_RAMROM);
+			mml = (char*)(RAM_AREA + n - OFFSET_RAMROM);
 		}
 	}
 	psg_playMML(mml);

@@ -66,14 +66,14 @@ S_INLINE int IJB_peek(int ad) {
 	} else if (ad < OFFSET_RAMROM) {
 		return CHAR_PATTERN[ad];
 	} else if (ad < OFFSET_RAMROM + SIZE_RAM) {
-		return ram[ad - OFFSET_RAMROM];
+		return RAM_AREA[ad - OFFSET_RAMROM];
 	}
 	return 0;
 }
 S_INLINE void IJB_poke(int ad, int n) {
 	ad -= OFFSET_RAMROM;
 	if (ad >= 0 && ad < SIZE_RAM) {
-		ram[ad] = n;
+		RAM_AREA[ad] = n;
 //		_printf("poke %x, %d\n", ad, n);
 	}
 }
@@ -280,7 +280,7 @@ STATIC_ICHIGOJAM_MAIN void ichigojam_main(void) { // main
 		if (sleepflg) {
 			//_g.screen_insertmode = 1;
 //			screen_showCursor(0);
-			char* linebuf = (char*)ram + OFFSET_RAM_LINEBUF;
+			char* linebuf = (char*)RAM_LINEBUF;
 			*linebuf = 1;
 			exec("LRUN");
 		}
@@ -338,7 +338,7 @@ void main_loop() {
 //put_num(SIZE_RAM); // 2688
 	#endif
 
-	char* linebuf = (char*)ram + OFFSET_RAM_LINEBUF;
+	char* linebuf = (char*)RAM_LINEBUF;
 	if (*linebuf) {
 //		put_str(ERR_MESSAGES[ERR_STACK_OVERFLOW - 1]);
 //		put_chr('\n');
