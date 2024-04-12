@@ -3,13 +3,19 @@
 ## setup
 
 - install gcc
-- install make
+- install GNU make
 
 ## build
 
 ```sh
 cd console
 make
+```
+
+you can select toolchain like this
+
+```
+make TOOLCHAIN=clang
 ```
 
 ## run
