@@ -479,9 +479,12 @@ int basic_execute(char* commandline) {
 			command_rem();
 			continue;
 		} else if (*pc == '\0') {
-			if (((pint)pc & 1) == 0) { // align 2byte
+#ifdef ALLOW_UNALIGNED_ACCESS
+			if (((pint)pc & 1) == ((pint)commandline & 1))
+#else
+			if (((pint)pc & 1) == 0)   // align 2byte
+#endif
 				pc++;
-			}
 			if (pc >= list && pc + 4 < list + _g.listsize) {
 				pc += 4;
 				continue;
