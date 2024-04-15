@@ -459,6 +459,12 @@ S_INLINE int basic_listSize() {
 #define BASIC_RESULT_FILES 7
 #endif
 
+#ifdef ALLOW_UNALIGNED_ACCESS
+#define AddrIsOdd ((pint)commandline & 1)
+#else
+#define AddrIsOdd 0 // aligned area, even address is guaranteed
+#endif
+
 // ret: 0 stop or err, 1 execute, 2 edit, 4 continue(ifdef IJB_DONT_LOOP), 5 input(ifdef IJB_DONT_LOOP)
 int basic_execute(char* commandline) {
 #ifdef IJB_DONT_LOOP
@@ -487,12 +493,9 @@ int basic_execute(char* commandline) {
 			command_rem();
 			continue;
 		} else if (*pc == '\0') {
-#ifdef ALLOW_UNALIGNED_ACCESS
-			if (((pint)pc & 1) == ((pint)commandline & 1))
-#else
-			if (((pint)pc & 1) == 0)   // align 2byte
-#endif
+			if (((pint)pc & 1) == AddrIsOdd) { // align 2byte
 				pc++;
+			}
 			if (pc >= list && pc + 4 < list + _g.listsize) {
 				pc += 4;
 				continue;
