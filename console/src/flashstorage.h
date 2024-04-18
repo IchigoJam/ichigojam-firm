@@ -17,7 +17,7 @@ int IJB_save(int n, uint8* list, int size) { // success:0, err: 1
 		return -1;
 
 	FlashFileName[0] = '0' + n;
-	if ((fp = fopen(FlashFileName, "w")) == NULL)
+	if ((fp = fopen(FlashFileName, "wb")) == NULL) // z88dk needs "wb"
 		return -1;
 
 	sz = fwrite(list, 1, size, fp);
@@ -39,7 +39,7 @@ int IJB_load(int n, uint8* list, int sizelimit, int init) { // ret:size if:-1 er
 		_g.lastfile = n;
 
 	FlashFileName[0] = '0' + n;
-	if ((fp = fopen(FlashFileName, "r")) == NULL)
+	if ((fp = fopen(FlashFileName, "rb")) == NULL) // z88dk needs "rb"
 		return -1;
 		
 	sz = fread(list, 1, sizelimit, fp);
@@ -49,6 +49,10 @@ int IJB_load(int n, uint8* list, int sizelimit, int init) { // ret:size if:-1 er
 		return -1;
 
 	for (i = sz; i < sizelimit; i++)
+		list[i] = 0;
+
+	// remove trailing garbage (CP/M pads ^Z)
+	for (i = sz - 1; i >= 0 && list[i]; i--, sz--)
 		list[i] = 0;
 
 	return sz;
