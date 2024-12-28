@@ -5,7 +5,7 @@
 
 - Place the following libraries directly under the `IchigoJam_P` directory:  
     - **IchigoJam_BASIC**: Copy the `IchigoJam_BASIC` directory located one level up  
-    - **pico-sdk**: https://github.com/NaturalStyle/pico-sdk.git (must use commit `196662b`)  
+    - **pico-sdk**: https://github.com/NaturalStyle/pico-sdk.git (must use commit `196662b`, and update submodules ``` git submodule update --init --recursive ```)  
     - **pico-extras**: https://github.com/raspberrypi/pico-extras.git (development used commit `09c64d5`)  
     - **PicoDVI**: https://github.com/mlorenzati/PicoDVI.git (must use commit `579eecc`)  
 
