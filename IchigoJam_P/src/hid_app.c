@@ -202,7 +202,7 @@ static void process_kbd_report(hid_keyboard_report_t const* report) {
                 uint8_t ch = 0;
                 if (keycode >= 128) {
                     if (keycode == UNDBAR) {
-                        ch = '_';
+                        ch = is_shift ? '_' : '\\';
                     } else if (keycode == JAKANA) {
                         toggle_kana_mode();
                     } else if (keycode == YENPIPE) {
