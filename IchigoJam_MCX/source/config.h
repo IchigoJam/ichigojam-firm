@@ -20,7 +20,7 @@
 
 #define IJB_VER_STR 1.4
 
-#define IJB_TITLE "IchigoJam BASIC " STRING2(IJB_VER_STR) "b MCX by jig.jp\n"
+#define IJB_TITLE "IchigoJam BASIC " STRING2(IJB_VER_STR) "b MCX jig.jp\n"
 
 #define VER_PLATFORM PLATFORM_CONSOLE
 
