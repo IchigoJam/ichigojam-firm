@@ -24,11 +24,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>source/main.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/IchigoJam_BASIC/main.c</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

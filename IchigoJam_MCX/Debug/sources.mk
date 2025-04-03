@@ -14,6 +14,7 @@ OBJS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+IchigoJam_BASIC \
 board \
 component/gpio \
 component/led \
