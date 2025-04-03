@@ -75,9 +75,9 @@ static void psg_tick();
 #include "ram.h"
 //uint8 vram[SCREEN_W * SCREEN_H];
 // constをつけると容量増
-//uint8* const vram = (uint8*)(ram + OFFSET_RAM_VRAM);
-//uint8* vram = (uint8*)(ram + OFFSET_RAM_VRAM);
-uint8* vram; // -> video_init() へ vram = (uint8*)(ram + OFFSET_RAM_VRAM);
+//uint8* const vram = (uint8*)RAM_VRAM;
+//uint8* vram = (uint8*)RAM_VRAM;
+uint8* vram; // -> video_init() へ vram = (uint8*)RAM_VRAM;
 
 const uint8 *pvram;
 //uint8 offsety;
@@ -117,9 +117,9 @@ uint8 CHAR_PATTERN[256 * 8];
 #endif
 
 //uint8 screen_pcg[SIZE_PCG * 8] __attribute__ ((aligned(4))); // SIZE_PCG * 8 byte
-//uint8* screen_pcg = (uint8*)(ram + OFFSET_RAM_PCG);
-//#define screen_pcg ((uint8*)(ram + OFFSET_RAM_PCG))
-uint8* const screen_pcg = ((uint8*)(ram + OFFSET_RAM_PCG)); // 同じ
+//uint8* screen_pcg = (uint8*)RAM_PCG;
+//#define screen_pcg ((uint8*)RAM_PCG)
+uint8* const screen_pcg = (uint8*)RAM_PCG; // 同じ
 
 // screen
 
@@ -293,7 +293,7 @@ S_INLINE void uart_putc(char c);
 //  screen
 
 INLINE void screen_clear() {
-	vram = (uint8*)(ram + OFFSET_RAM_VRAM);
+	vram = (uint8*)RAM_VRAM;
 	_g.cursorx = _g.cursory = 0;
 	memclear4(vram, SCREEN_W * SCREEN_H);
 //	if (_g.uartmode == 2) {
