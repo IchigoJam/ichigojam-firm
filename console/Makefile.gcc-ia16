@@ -1,0 +1,1 @@
+CC=ia16-elf-gcc -std=c99 -DC99 -DALLOW_UNALIGNED_ACCESS
