@@ -25,7 +25,7 @@ int extension_command(int token) { // if match ret 1
   if (token == TOKEN_SPR_PLAY) {
   	int16 n = token_expression();
 		if (n >= OFFSET_RAMROM) {
-			const char* p = (char*)(ram + n - OFFSET_RAMROM);
+			const char* p = (char*)(RAM_AREA + n - OFFSET_RAMROM);
       char fn[128];
       fn[127] = '\0';
       for (int i = 0; i < 128 - 5; i++) {
