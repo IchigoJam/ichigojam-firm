@@ -25,7 +25,7 @@ static void iot_out2(int ad, int len, int flash) { // 104 -> -44  .. +148byte
 #define iot_out(n) iot_inout(0, (n))
 
 static int16 iot_inout(int typein, int n) {
-	int16* v = (int16*)(ram + OFFSET_RAM_I2CBUF); // i2cbuf size 54byte
+	int16* v = (int16*)RAM_I2CBUF; // i2cbuf size 54byte
 	uint16 param[5];
 	if (typein) {
 		v[0] = v[1] = 0x30;
@@ -70,7 +70,7 @@ static int16 iot_inout(int typein, int n) {
 static int16 iot_in() {
 	// POKE#114A,48,0,48:U=I2CR(79,#114A,3,#114E,22)
 	//:F=PEEK(#[16]!=5:N=[18]:?F,N
-	int16* v = (int16*)(ram + OFFSET_RAM_I2CBUF); // i2cbuf size 54byte
+	int16* v = (int16*)RAM_I2CBUF; // i2cbuf size 54byte
 	uint16 param[5];
 	v[0] = v[1] = 0x30;
 	param[0] = 0x4F;
@@ -93,7 +93,7 @@ static int16 iot_in() {
 static void iot_out(int n) {
 	// LET[0],2593,19457,N,0,0,0,N>>8^N^102:U=I2CR(79,#800,13,#820,3)
 	// 1 79 2048 13 2080 3
-	int16* v = (int16*)(ram + OFFSET_RAM_I2CBUF);
+	int16* v = (int16*)RAM_I2CBUF;
 	v[0] = 0x0A21;
 	//v[1] = 0x4C01;	// unsigned 64bit integer
 	//v[1] = 0x6C01;	// signed 64bit integer
@@ -138,14 +138,14 @@ static void iot_out2(int ad, int len, int flash) { // 104 -> -44  .. +148byte
 	if (len & 7) { // 8の倍数でなかったら丸める
 		len = ((len >> 3) + 1) << 3;
 	}
-	uint8_t* data = (uint8_t*)(ram + ad - OFFSET_RAMROM);
+	uint8_t* data = (uint8_t*)(RAM_AREA + ad - OFFSET_RAMROM);
 	uint16 param[5];
 	param[0] = 0x4F; // =79
 	param[1] = 0x700 + OFFSET_RAM_I2CBUF; // 0x114A;
 	param[2] = 13;
 	param[3] = 0x700 + 13 + OFFSET_RAM_I2CBUF;
 	param[4] = 3;
-	uint8_t* v = (uint8_t*)(ram + OFFSET_RAM_I2CBUF);
+	uint8_t* v = (uint8_t*)RAM_I2CBUF;
 	for (int j = 0; j < len; j += 8) {
 		*(uint16_t*)v = 0x0A20; // write queue = 2592
 		//v[1] = 0x4C01;	// unsigned 64bit integer
