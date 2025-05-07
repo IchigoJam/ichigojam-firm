@@ -23,6 +23,7 @@ RM := rm -rf
 -include component/led/subdir.mk
 -include component/gpio/subdir.mk
 -include board/subdir.mk
+-include IchigoJam_BASIC/subdir.mk
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
