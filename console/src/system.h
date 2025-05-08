@@ -22,7 +22,9 @@ INLINE void IJB_sleep() {
 S_INLINE void IJB_reset() {
 }
 int IJB_wait(int n, int active) { // if stop ret 1
+#ifndef __CPM__
   usleep(n * 1000000 / 60);
+#endif
   return 0;
 }
 
