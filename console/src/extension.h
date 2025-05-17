@@ -24,7 +24,7 @@ int extension_command(int token) { // if match ret 1
     put_str("\n");
 
     if (n >= OFFSET_RAMROM) {
-      const char* p = (char*)(ram + n - OFFSET_RAMROM);
+      const char* p = (char*)(RAM_AREA + n - OFFSET_RAMROM);
       char fn[128];
       fn[127] = '\0';
       for (int i = 0; i < 127; i++) {

@@ -27,7 +27,9 @@ INLINE int key_btn(int n) {
   return 0;
 }
 
-char* keybuf = (char*)(ram + (OFFSET_RAM_KEYBUF + 1)); // kbhit[-1], len:[0], buf:[1-(KEY_BUF_LEN-1] // 24512+60 // 小さい！
+//以下の記法はz88dk-sccz80においてerror: Expecting constant expressionとなる
+//char* keybuf = (char*)(RAM_KEYBUF + 1); // kbhit[-1], len:[0], buf:[1-(KEY_BUF_LEN-1] // 24512+60 // 小さい！
+char* keybuf = (char*)RAM_KEYBUF + 1; // kbhit[-1], len:[0], buf:[1-(KEY_BUF_LEN-1] // 24512+60 // 小さい！
 
 int key_getKey() {
   return getchar();

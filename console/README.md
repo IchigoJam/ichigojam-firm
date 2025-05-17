@@ -21,7 +21,7 @@ make TOOLCHAIN=clang
 ## run
 
 ```sh
-./a.out
+./IchigoJam_BASIC
 ```
 
 ## 商標 / trademark
