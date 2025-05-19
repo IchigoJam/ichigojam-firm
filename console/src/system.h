@@ -22,7 +22,18 @@ INLINE void IJB_sleep() {
 S_INLINE void IJB_reset() {
 }
 int IJB_wait(int n, int active) { // if stop ret 1
-#ifndef __CPM__
+#if defined(__CPM__)
+  /* unsupported */
+#elif defined(__MSX__) /* NTSC only */
+  #define JIFFY 0xfc9e
+  unsigned short t;
+  if (n > 0) {
+    asm("di");
+    t = (*(volatile unsigned short *)JIFFY) + n;
+    asm("ei");
+    while (*(volatile unsigned short *)JIFFY != t);
+  }
+#else
   usleep(n * 1000000 / 60);
 #endif
   return 0;
